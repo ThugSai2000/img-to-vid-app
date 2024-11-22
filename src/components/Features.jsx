@@ -1,9 +1,28 @@
 import { Video } from 'lucide-react'
-import React from 'react'
+import React, { useState } from 'react'
 import { features } from '../utils/data'
+import ImageGenerator from './ImageGenerator'
 
 const Features = () =>
 {
+    const [isImageGeneratorOpen, setIsImageGeneratorOpen] = useState(false)
+
+    const handle = (index) =>
+    {
+        if (features[index].comingSoon)
+        {
+            alert('This feature is coming soon!')
+            return
+        }
+
+        if (index === 1)
+        {
+            setIsImageGeneratorOpen(true)
+        }
+
+    }
+
+
     return (
         <section id='features' className='py-24 bg-gray-900'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
@@ -18,19 +37,24 @@ const Features = () =>
 
 
                     {features.map((feature, index) => (
-                        <button className='text-left relative group bg-black/50 backdrop-blur-sm p-8  rounded-xl border border-gray-800 hover:border-purple-500 transition-colors' key={index}>
+                        <button onClick={handle} className='text-left relative group bg-black/50 backdrop-blur-sm p-8  rounded-xl border border-gray-800 hover:border-purple-500 transition-colors' key={index}>
                             <div className='abosolute inset-0 bg-gradient-to-r from-purple-500/10 to blue-500/10 rounded-xl p-2'>
                                 <feature.icon className='w-12 h-12 text-purple-500 mb-4' />
                                 <h3 className='text-xl font-semibold text-white mb-2'>
                                     {feature.title}
+                                    {/* {feature.comingSoon && */}
                                     <span className='ml-2 text-xs bg-purple-500/20 px-2 py-1 rounded-full'>Soon</span>
+                                    {/* } */}
                                 </h3>
                                 <p className='text-gray-400'>{feature.description}</p>
                             </div>
                         </button>
                     ))}
 
-
+                    <ImageGenerator
+                    // isOpen={isImageGeneratorOpen}
+                    // onClose={() => setIsImageGeneratorOpen(false)}
+                    />
 
 
 
